@@ -1,10 +1,23 @@
-import Typography from '@mui/material/Typography';
 import { type FC } from 'react';
-import { ObjectView } from '.';
+import { ObjectView } from './index';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+const getArrayName = (value: unknown[]) => `${(value as any).__proto__.constructor.name}(${value.length})`;
 
 export const ObjectViewArray: FC<{ value: unknown[] }> = ({ value }) => (
   <>
+    <Typography
+      component="span"
+      fontFamily="monospace"
+      fontStyle="italic"
+      color="hsl(150, 40%, 40%)"
+    >
+      {getArrayName(value)}
+    </Typography>
+
+    {' '}
+
     <Typography component="span" color="gray.300" fontFamily="monospace">
       {'['}
     </Typography>

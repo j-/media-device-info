@@ -5,7 +5,6 @@ import { RequestMedia } from './RequestMedia';
 export const RouteIndex = () => (
   <>
     <h1>Media Device Info</h1>
-    <p>Enumerate devices</p>
     <ul>
       <li>
         <Link to="/navigator.mediaDevices.enumerateDevices()">

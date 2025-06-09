@@ -5,7 +5,7 @@ import { type FC, useState } from 'react';
 import { ObjectView } from '../../ObjectView';
 import { Link } from 'react-router';
 
-const initEnumerateDevices = () => navigator.mediaDevices.enumerateDevices();
+const initEnumerateDevices = async () => navigator.mediaDevices.enumerateDevices();
 
 export const RouteNavigatorMediaDevicesEnumerateDevices: FC = () => {
   const [devicesPromise, setDevicesPromise] = useState<
@@ -26,7 +26,6 @@ export const RouteNavigatorMediaDevicesEnumerateDevices: FC = () => {
         <Button
           type="button"
           onClick={() => setDevicesPromise(undefined)}
-          sx={{ textTransform: 'initial' }}
         >
           Clear
         </Button>
@@ -34,7 +33,6 @@ export const RouteNavigatorMediaDevicesEnumerateDevices: FC = () => {
         <Button
           type="button"
           onClick={() => setDevicesPromise(initEnumerateDevices)}
-          sx={{ textTransform: 'initial' }}
         >
           <code>navigator.mediaDevices.enumerateDevices()</code>
         </Button>

@@ -5,9 +5,7 @@ import { VideoStream } from './VideoStream';
 import { Link } from 'react-router';
 
 export const RouteExperimentsDualCamera: FC = () => {
-  // prettier-ignore
   const [userMediaStream, setUserMediaStream] = useState<MediaStream | null>(null);
-  // prettier-ignore
   const [environmentMediaStream, setEnvironmentMediaStream] = useState<MediaStream | null>(null);
 
   const handleClickRequestUserCamera = useCallback(async () => {

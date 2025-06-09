@@ -12,7 +12,7 @@ export const ObjectViewFunction: FC<{
       component="span"
       fontFamily="monospace"
       onClick={onClick}
-      sx={{ cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+      // sx={{ cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
     >
       {value.name}
     </Typography>

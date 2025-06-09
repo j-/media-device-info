@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { ObjectView } from '.';
 import { ObjectViewFunction } from './ObjectViewFunction';
 
-function allKeys<T>(obj: T): (keyof T)[] {
+function forInKeys<T>(obj: T): (keyof T)[] {
   const keys: (keyof T)[] = [];
   for (const key in obj) {
     keys.push(key);
@@ -12,19 +12,31 @@ function allKeys<T>(obj: T): (keyof T)[] {
   return keys;
 }
 
+function ownKeys<T>(obj: T): (keyof T)[] {
+  return Object.getOwnPropertyNames(obj) as (keyof T)[];
+}
+
+function allKeys<T>(obj: T): (keyof T)[] {
+  const keys = new Set<keyof T>();
+  for (const key of forInKeys(obj)) keys.add(key);
+  for (const key of ownKeys(obj)) keys.add(key);
+  return [...keys.values()];
+}
+
 function orderedKeys<T>(obj: T): (keyof T)[] {
   const all = allKeys(obj);
-  const allSet = new Set(all);
   const fnKeys = all.filter((key) => typeof obj[key] === 'function');
-  const restSet = allSet.difference(new Set(fnKeys));
+  // Manually compute the difference
+  const fnKeySet = new Set(fnKeys);
+  const rest = all.filter((key) => !fnKeySet.has(key));
 
-  const restSorted = [...restSet].sort();
+  const restSorted = [...rest].sort();
   const fnSorted = [...fnKeys].sort();
 
   return [...restSorted, ...fnSorted];
 }
 
-export const ObjectViewObject: FC<{ value: Record<string, object> }> = ({
+export const ObjectViewObject: FC<{ value: Record<string, any> }> = ({
   value: parent,
 }) => {
   const keys = orderedKeys(parent);
@@ -61,7 +73,7 @@ export const ObjectViewObject: FC<{ value: Record<string, object> }> = ({
           >
             <Typography
               component="span"
-              color="gray.300"
+              color={typeof parent[key] === 'function' ? 'textDisabled' : 'textPrimary'}
               fontFamily="monospace"
             >
               {key}
@@ -71,7 +83,7 @@ export const ObjectViewObject: FC<{ value: Record<string, object> }> = ({
             {typeof parent[key] === 'function' ? (
               <ObjectViewFunction
                 value={parent[key]}
-                onClick={async () => console.log(await parent[key]())}
+                // onClick={async () => console.log(await parent[key]())}
               />
             ) : (
               <ObjectView value={parent[key]} />

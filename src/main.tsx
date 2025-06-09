@@ -5,8 +5,7 @@ import '@fontsource/roboto/700.css';
 import CssBaseline from '@mui/material/CssBaseline';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
-import createTheme from '@mui/material/styles/createTheme';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { RouteIndex } from './routes/index';
@@ -21,14 +20,30 @@ const theme = createTheme({
   typography: {
     fontSize: 12,
   },
+  palette: {
+    background: {
+      default: 'hsla(200, 80%, 80%, 10%)',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'initial',
+          textAlign: 'left',
+          userSelect: 'text',
+        },
+      },
+    },
+  },
 });
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <CssBaseline />
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <SnackbarProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/media-device-info">
           <Routes>
             <Route
               path="/navigator.mediaDevices.enumerateDevices()"

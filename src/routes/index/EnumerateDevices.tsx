@@ -21,7 +21,6 @@ export const EnumerateDevices = () => {
       <Button
         type="button"
         onClick={handleClickQueryMediaDeviceInfo}
-        sx={{ textTransform: 'initial' }}
       >
         <code>navigator.mediaDevices.enumerateDevices()</code>
       </Button>

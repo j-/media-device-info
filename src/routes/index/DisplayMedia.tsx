@@ -16,7 +16,6 @@ export const DisplayMedia = () => {
       <Button
         type="button"
         onClick={handleClickGetDisplayMedia}
-        sx={{ textTransform: 'initial' }}
       >
         <code>navigator.mediaDevices.getDisplayMedia()</code>
       </Button>

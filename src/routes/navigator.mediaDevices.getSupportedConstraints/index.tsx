@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import { type FC, useCallback, useState } from 'react';
+import { type FC, useState } from 'react';
 import { ObjectView } from '../../ObjectView';
 import { Link } from 'react-router';
 
@@ -27,7 +27,6 @@ export const RouteNavigatorMediaDevicesGetSupportedConstraints: FC = () => {
         <Button
           type="button"
           onClick={() => setSupportedConstraints(undefined)}
-          sx={{ textTransform: 'initial' }}
         >
           Clear
         </Button>
@@ -35,7 +34,6 @@ export const RouteNavigatorMediaDevicesGetSupportedConstraints: FC = () => {
         <Button
           type="button"
           onClick={() => setSupportedConstraints(initGetSupportedConstraints)}
-          sx={{ textTransform: 'initial' }}
         >
           <code>navigator.mediaDevices.getSupportedConstraints()</code>
         </Button>
